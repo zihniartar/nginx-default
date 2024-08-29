@@ -1,1 +1,21 @@
+server {
+    listen 80;
+    server_name linux.smartstore.com;
+
+	  # place your certificates in /etc/ssl/certs/ and /etc/ssl/private/ and uncomment the following two lines
+    # ssl_certificate /etc/ssl/certs/yourdomain.com.crt.pem;
+    # ssl_certificate_key /etc/ssl/private/yourdomain.key.pem;
+
+    # ssl_protocols TLSv1.2 TLSv1.3;
+    # ssl_ciphers HIGH:!aNULL:!MD5;
+
+    location / {
+        proxy_pass http://localhost:5000;  # Anpassen des Kestrel-Servers
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection keep-alive;
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
 
