@@ -16,6 +16,8 @@ server {
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_ciphers HIGH:!aNULL:!MD5;
 
+   client_max_body_size 1000M; # Set the maximum upload size to 1000MB
+
     location / {
         proxy_pass http://localhost:5000;  # Anpassen des Kestrel-Servers
         proxy_http_version 1.1;
